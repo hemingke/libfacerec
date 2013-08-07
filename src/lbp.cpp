@@ -190,6 +190,7 @@ Mat cv::spatial_histogram(InputArray _src, int numPatterns, int grid_x, int grid
         for(int j = 0; j < grid_x; j++) {
             Mat src_cell = Mat(src, Range(i*height,(i+1)*height), Range(j*width,(j+1)*width));
             Mat cell_hist = histc(src_cell, 0, (numPatterns-1), true);
+            //histc() is not a c++ or opencv function. We might use calcHist() here
             // copy to the result matrix
             Mat result_row = result.row(resultRowIdx);
             cell_hist.reshape(1,1).convertTo(result_row, CV_32FC1);
