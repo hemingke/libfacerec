@@ -189,7 +189,13 @@ Mat cv::spatial_histogram(InputArray _src, int numPatterns, int grid_x, int grid
     for(int i = 0; i < grid_y; i++) {
         for(int j = 0; j < grid_x; j++) {
             Mat src_cell = Mat(src, Range(i*height,(i+1)*height), Range(j*width,(j+1)*width));
-            Mat cell_hist = histc(src_cell, 0, (numPatterns-1), true);
+            int nImg=1;
+            int channels[]={0};
+            int dims=1;
+            int histSize[]={numPatterns};
+            float hranges[] = {0, 256};
+            const float *ranges[]={hranges};
+            cv::calcHist(&src_cell, nImg, channels, Mat(), cell_hist, dims, histSize, ranges, true, false);
             // copy to the result matrix
             Mat result_row = result.row(resultRowIdx);
             cell_hist.reshape(1,1).convertTo(result_row, CV_32FC1);
