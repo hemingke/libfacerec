@@ -189,6 +189,7 @@ Mat cv::spatial_histogram(InputArray _src, int numPatterns, int grid_x, int grid
     for(int i = 0; i < grid_y; i++) {
         for(int j = 0; j < grid_x; j++) {
             Mat src_cell = Mat(src, Range(i*height,(i+1)*height), Range(j*width,(j+1)*width));
+            Mat cell_hist;
             int nImg=1;
             int channels[]={0};
             int dims=1;
